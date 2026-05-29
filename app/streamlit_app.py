@@ -4,15 +4,12 @@ import tempfile
 import sys
 from pathlib import Path
 
-import pandas as pd
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from brain_tumor_hpsc.config import load_config
-from brain_tumor_hpsc.predict import predict_image
-
 CONFIG = load_config(ROOT / "config" / "config.yaml")
 CLASS_NAMES = CONFIG["data"]["class_names"]
 IMAGE_SIZE = tuple(CONFIG["data"]["image_size"])
@@ -35,6 +32,7 @@ with right:
     if model_file and image_file:
         try:
             import tensorflow as tf
+            from brain_tumor_hpsc.predict import predict_image
 
             with tempfile.TemporaryDirectory() as tmpdir:
                 model_path = Path(tmpdir) / model_file.name
@@ -47,11 +45,7 @@ with right:
 
             st.metric("Predicted class", prediction["class_name"])
             st.metric("Confidence", f"{prediction['confidence']:.2%}")
-            probabilities = pd.DataFrame(
-                prediction["probabilities"].items(),
-                columns=["Class", "Probability"],
-            )
-            st.bar_chart(probabilities.set_index("Class"))
+            st.bar_chart(prediction["probabilities"])
         except ModuleNotFoundError:
             st.warning(
                 "The hosted demo is running in lightweight mode. "
