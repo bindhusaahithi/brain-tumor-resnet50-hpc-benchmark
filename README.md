@@ -57,6 +57,12 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+For local development checks, install the development dependencies:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
 For GPU training, install the TensorFlow build compatible with your CUDA environment, or run the training notebook/script on Google Colab.
 
 ## Dataset Layout

@@ -3,6 +3,9 @@
 install:
 	python -m pip install -r requirements.txt
 
+install-dev:
+	python -m pip install -r requirements-dev.txt
+
 lint:
 	ruff check .
 
