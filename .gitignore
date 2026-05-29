@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local data and model artifacts
+data/raw/*
+data/processed/*
+artifacts/
+*.keras
+*.h5
+*.ckpt
+
+# Keep folder placeholders
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Generated reports
+reports/evaluation/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example

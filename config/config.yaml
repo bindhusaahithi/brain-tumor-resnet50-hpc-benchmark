@@ -1,0 +1,29 @@
+project:
+  name: brain-tumor-hpsc
+  task: brain_mri_multiclass_classification
+  seed: 42
+
+data:
+  image_size: [224, 224]
+  batch_size: 32
+  class_names:
+    - glioma
+    - meningioma
+    - notumor
+    - pituitary
+  validation_split: 0.2
+
+training:
+  architecture: ResNet50
+  pretrained_weights: imagenet
+  freeze_backbone: true
+  epochs: 50
+  optimizer: adam
+  learning_rate: 0.001
+  loss: sparse_categorical_crossentropy
+  metrics:
+    - accuracy
+
+benchmark:
+  cpu_environment: Anvil HPC - 16 CPU cores
+  gpu_environment: Google Colab - NVIDIA T4
