@@ -33,9 +33,9 @@ with right:
         st.image(image_file, caption="Uploaded MRI", use_container_width=True)
 
     if model_file and image_file:
-        import tensorflow as tf
-
         try:
+            import tensorflow as tf
+
             with tempfile.TemporaryDirectory() as tmpdir:
                 model_path = Path(tmpdir) / model_file.name
                 image_path = Path(tmpdir) / image_file.name
@@ -52,6 +52,11 @@ with right:
                 columns=["Class", "Probability"],
             )
             st.bar_chart(probabilities.set_index("Class"))
+        except ModuleNotFoundError:
+            st.warning(
+                "The hosted demo is running in lightweight mode. "
+                "Install requirements-ml.txt locally to enable Keras model inference."
+            )
         except Exception as exc:
             st.error(f"Unable to run inference: {exc}")
     else:

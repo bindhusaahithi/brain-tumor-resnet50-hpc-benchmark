@@ -57,6 +57,12 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+For model training or local Keras inference, install the ML dependencies:
+
+```bash
+pip install -r requirements-ml.txt
+```
+
 For local development checks, install the development dependencies:
 
 ```bash
@@ -118,6 +124,8 @@ streamlit run app/streamlit_app.py
 ```
 
 Upload an MRI image, select a trained model file, and view the predicted tumor class with confidence scores.
+
+Streamlit Cloud uses the lightweight `requirements.txt` file so the hosted demo can deploy reliably. Full Keras model inference requires `requirements-ml.txt` locally or in Colab.
 
 ## Resume Bullet
 
